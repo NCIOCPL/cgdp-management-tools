@@ -1,5 +1,7 @@
 'use strict'
 
+const pRetry = require ('p-retry');
+
 const SFCategoryBase = require('../category-base');
 
 /**
@@ -31,11 +33,18 @@ class SFTasks extends SFCategoryBase {
      * @param {function(boolean complete) callback} pulse Optional function to notify periodically that the
      * task is still running. Receives a boolean value to note whether the task has completed.
      * Useful for letting the user know the program isn't hung.
+     * @param {Number} pollingFrequency the number of seconds to wait between consecutive status checks.
      */
-    async waitForCompletion(taskId, pulse) {
+    async waitForCompletion(taskId, pulse, pollingFrequency = 60000) {
+
+        if (!pollingFrequency || typeof pollingFrequency === 'number' || pollingFrequency < 1000)
+            pollingFrequency = 60000;
 
         const wait = async () => {
-            const status = await this.taskStatus(taskId);
+
+            const attempt = async() => { return await this.taskStatus(taskId);}
+
+            const status = await pRetry( attempt );
 
             const completed = (Number(status.wip_task.completed) != 0);
 
@@ -44,7 +53,7 @@ class SFTasks extends SFCategoryBase {
             }
 
             if(!completed) {
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                await new Promise(resolve => setTimeout(resolve, pollingFrequency));
                 return await wait();
             }
 

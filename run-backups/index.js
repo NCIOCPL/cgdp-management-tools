@@ -2,7 +2,7 @@ const asyncPool                 = require('tiny-async-pool');
 const config                    = require('config');
 const nodemailer                = require('nodemailer');
 
-const SiteFactoryClient         = require('./lib/site-factory-client');
+const SiteFactoryClient         = require('@nciocpl/site-factory-client');
 
 const factoryConn = config.get('factoryConnection');
 

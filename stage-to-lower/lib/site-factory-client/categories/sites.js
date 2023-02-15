@@ -73,6 +73,17 @@ class SFSites extends SFCategoryBase {
   }
 
   /**
+   *
+   * @param {number} siteID
+   * @param {string} label Human-readable label for the backup.
+   */
+  async createBackup(siteID, label) {
+    return this.client.post(`/sites/${siteID}/backup`, {
+      "label": label
+    });
+  }
+
+  /**
    * Gets the backups for a site.
    *
    * @param {*} siteID
