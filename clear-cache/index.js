@@ -22,7 +22,7 @@ async function main() {
         const clearCache = id => sfClient.sites.clearCache(id);
         await asyncPool(5, siteIds, clearCache);
 
-        console.log(`Caches are being cleared on '${targetEnv}'.`);
+        console.log(`Caches are being cleared on '${factoryConn.factoryHost}'.`);
 
     } catch (err) {
         console.error(err);
