@@ -1,7 +1,4 @@
-# Private configuration files
-config/local.json
-config/local.json.*
-
+# Local changes at bottom.
 
 # Logs
 logs
@@ -95,3 +92,7 @@ config/local.json
 
 # VS Code files
 .vscode
+
+# Private configuration files
+config/local.json
+config/local.json.*
