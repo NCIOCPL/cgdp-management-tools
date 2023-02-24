@@ -84,6 +84,41 @@ class SFSites extends SFCategoryBase {
   }
 
   /**
+   * Create a new site.
+   *
+   * @param {*} siteName The new site's name.
+   * @param {Number[]} a list of ids for groups the site should be
+   *  part of.  Optional. (Allegedly)
+   * @returns A data structure with the new site's metadata and
+   * task ID for creating it.
+   *  {
+   *    "id": 191,
+   *    "site": "site1",
+   *    "domains": [
+   *      "mysite.site-factory.com"
+   *    ],
+   *    "task_id": 12345
+   *  }
+   */
+  async createSite(siteName, groupIDs) {
+
+    const body = {
+      "site_name": siteName
+    }
+
+    if(groupIDs){
+      if( groupIDs.constructor === Array && groupIDs.every( value => value.constructor === Number))
+        body["group_ids"] = groupIDs;
+      else if( groupIDs.constructor === Number)
+        body["group_ids"] = [groupIDs];
+      else
+        throw new Error('groupIDs must be numeric.');
+    }
+
+    return this.client.post(`/sites`, body);
+  }
+
+  /**
    * Gets the backups for a site.
    *
    * @param {*} siteID
@@ -103,6 +138,20 @@ class SFSites extends SFCategoryBase {
     });
   }
 
+  /**
+   * Clear the Drupal and Varnish caches for a site.
+   *
+   * @param {*} siteID The ID of the specific site to be cleared.
+   * @returns a data structure containing the IDs for the associated tasks:
+   *    {
+   *      "id" : 123,
+   *      "time" : "2017-05-04T09:25:26+00:00",
+   *      "task_ids": {
+   *        "drupal_cache_clear" : 1234,
+   *        "varnish_cache_clear" : 1234
+   *      }
+   *    }
+   */
   async clearCache(siteID) {
     return this.client.post('/sites/' + siteID + '/cache-clear');
   }

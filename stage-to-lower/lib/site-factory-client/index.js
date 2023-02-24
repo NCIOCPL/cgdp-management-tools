@@ -4,6 +4,7 @@ const { HttpsAgent }                = require('agentkeepalive');
 
 const SFRequest                     = require('./request');
 const SFDomains                     = require('./categories/domains');
+const SFGroups                      = require('./categories/groups');
 const SFService                     = require('./categories/service');
 const SFSites                       = require('./categories/sites');
 const SFTasks                       = require('./categories/tasks');
@@ -57,6 +58,13 @@ class SiteFactoryClient {
    */
   get domains() {
     return new SFDomains(this.client);
+  }
+
+  /**
+   * Gets groups category
+   */
+  get groups() {
+    return new SFGroups(this.client);
   }
 
   /**
