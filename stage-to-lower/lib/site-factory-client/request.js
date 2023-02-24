@@ -71,6 +71,7 @@ class SFRequest {
     })
     .catch((err) => {
       console.log(err);
+      throw err;
     });
 
     if(res.status === 200) {
@@ -94,6 +95,18 @@ class SFRequest {
     });
 
     if (res.status === 200) {
+      return res.data;
+    }
+  }
+
+  async delete(path) {
+    const res = await this.axiosClient.delete(path)
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+
+    if(res.status === 200){
       return res.data;
     }
   }
