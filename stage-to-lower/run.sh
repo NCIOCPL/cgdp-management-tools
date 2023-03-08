@@ -8,7 +8,17 @@ then
     exit 1
 fi
 
-export NODE_CONFIG="{ \"factoryConnection\": { \"username\": \"${USERNAME}\", \"apikey\": \"${ACSF_API_KEY}\", \"factoryHost\": \"${FACTORY_HOST}\" } }"
+FACTORY_CONNECTION="\"factoryConnection\": { \"username\": \"${USERNAME}\", \"apikey\": \"${ACSF_API_KEY}\", \"factoryHost\": \"${FACTORY_HOST}\" }"
+
+# List of sites to stage.  Jenkins will provide this as a comma-separated list.
+if [[ -z $SITE_FILTER_LIST ]];
+then
+    FILTER=""
+else
+    FILTER=", \"stageList\": \"$SITE_FILTER_LIST\""
+fi
+
+export NODE_CONFIG="{ $FACTORY_CONNECTION $FILTER }"
 
 cd $(dirname $0)
 

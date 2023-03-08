@@ -4,15 +4,7 @@
     "apikey": "11111111",
     "factoryHost": "www.site.acsitefactory.com"
   },
-  "roles": {
-    "promote": ["role"],
-    "remove": ["acquia employee"],
-    "desired": [
-      "new role",
-      "another role"
-    ]
-  },
-  "stageList": [
+  "requiredSites": [
     "site1",
     "site2",
     "site3"

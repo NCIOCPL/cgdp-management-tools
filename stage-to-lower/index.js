@@ -4,6 +4,7 @@ const asyncPool                 = require('tiny-async-pool');
 const SiteFactoryClient         = require('./lib/site-factory-client');
 const SiteFactoryClient2        = require('./lib/site-factory-client-2');
 const DomainUtility             = require('./lib/domain-utility');
+const SiteFilter                = require('./lib/site-filter');
 const UserFilter                = require('./lib/user-filter');
 
 const factoryConn = config.get('factoryConnection');
@@ -32,7 +33,9 @@ async function main() {
 
         const srcSitelist = await sourceClient.sites.list(); // List of ACSF sites
 
-        const siteIds = srcSitelist.map((site) => site.id);
+        const filtered = SiteFilter.filterSiteList(srcSitelist, config.stageList);
+
+        const siteIds = filtered.map((site) => site.id);
 
         // Stage to requested lower tier.
         let stageTask = await sourceClient2.stage.stage(targetEnv, siteIds, true, true, false);
