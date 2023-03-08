@@ -1,7 +1,5 @@
 'use strict'
 
-const c = require("config")
-
 /**
  * Filter a list of users according to their roles.
  *

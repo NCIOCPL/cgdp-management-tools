@@ -1,0 +1,16 @@
+{
+  "name": "get-site-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Blair Learn (https://github.com/blairlearn)",
+  "license": "ISC",
+  "dependencies": {
+    "@nciocpl/site-factory-client": "^1.0.2",
+    "config": "^3.3.9"
+  }
+}
