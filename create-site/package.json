@@ -1,0 +1,17 @@
+{
+  "name": "create-sites",
+  "version": "1.0.0",
+  "description": "Create sites in an ACSF environment",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Blair Learn (https://github.com/blairlearn)",
+  "license": "ISC",
+  "dependencies": {
+    "@nciocpl/site-factory-client": "^1.0.2",
+    "commander": "^10.0.1",
+    "config": "^3.3.9"
+  }
+}
