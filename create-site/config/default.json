@@ -1,0 +1,8 @@
+{
+  "factoryConnection": {
+    "username": "nobody",
+    "apikey": "11111111",
+    "factoryHost": "www.site.acsitefactory.com"
+  },
+  "defaultGroupName": "default-site-group"
+}
